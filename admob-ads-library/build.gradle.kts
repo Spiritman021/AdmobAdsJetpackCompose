@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("maven-publish")
+
 }
 
 android {
@@ -56,4 +58,19 @@ dependencies {
     implementation ("androidx.appcompat:appcompat:1.2.0")
     implementation ("androidx.constraintlayout:constraintlayout:2.0.4")
 
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.github.Spiritman021"
+            artifactId = "admob-ads-library"
+            version = "1.0"
+
+//            from(components["release"])
+            afterEvaluate{
+                from(components["release"])
+            }
+        }
+    }
 }
